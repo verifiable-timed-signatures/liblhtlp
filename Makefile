@@ -26,8 +26,8 @@ ${LHP_TARGET}: ${LHP_OBJ}
 	ar rcs ${LIBS}/${LHP_TARGET}.a $^
 
 clean:
-	rm -rf ${BUILD_DIR}/*
-	rm -rf ${LIBS}/*.a
+	@rm -rf ${BUILD_DIR}/*
+	@rm -rf ${LIBS}/*.a
 
 test: ${TARGET}
 	make -C test/

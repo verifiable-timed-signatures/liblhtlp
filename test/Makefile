@@ -5,14 +5,21 @@ EXT_LIBS := -llhp -lgmp -lpbc -lssl -lcrypto
 CC=gcc
 CFLAGS=-I ${INCLUDE} -L ${LIBS} ${EXT_LIBS} -g
 
+.PHONY: test clean
+
 ./%.o: %.c
-	$(CC) $^ -o $@ $(CFLAGS)
+	@$(CC) $^ -o $@ $(CFLAGS)
 
 ./%.test: %.o
-	./$^
+	@echo "-----------------------------"
+	@echo "Running `basename $^ .o` Test"
+	@echo "-----------------------------"
+	@./$^
+	@echo "============================="
 
-test: lhp_test.test \
-	batch_test.test
+test: code.test \
+	timecode.test \
+	batch.test
 
 clean: 
 	@rm -rf ./*.o
