@@ -78,6 +78,42 @@ void LHP_PGen ( LHP_puzzle_t* puzzle , LHP_param_t* pp , unsigned char* str ,
 	gmp_randclear ( state );
 }
 
+void LHP_PGen_seeded ( LHP_puzzle_t* puzzle , 
+		LHP_param_t* pp , 
+		unsigned char* str , size_t s_size , 
+		unsigned char* seed, size_t seed_len 
+	)
+{
+	mpz_t seed_mpz ;
+	mpz_init ( seed_mpz ) ;
+	mpz_import ( seed_mpz , seed_len , 1 , 1 , 0 , 0 , seed ) ;
+	gmp_randstate_t state;
+	gmp_randinit_default ( state ) ;
+	gmp_randseed ( state , seed_mpz ) ;
+	mpz_t s ;
+	mpz_init_set_ui ( s , 0 ) ;
+	for(int i = 0 ; i < s_size ; i++) {
+		mpz_mul_ui ( s , s , 1 << 8 ) ;
+		mpz_add_ui ( s , s , (uint8_t)str[i] ) ;
+	}
+	mpz_t r , N2 , temp ;
+	mpz_init ( r ) ;
+	mpz_init ( N2 ) ;
+	mpz_init ( temp ) ;
+	mpz_pow_ui ( N2 , pp->N , 2 ) ;
+	mpz_urandomm ( r , state , N2 ) ;
+	mpz_powm ( puzzle->u , pp->g , r , pp->N ) ;
+	mpz_mul ( temp , r , pp->N ) ;
+	mpz_powm ( puzzle->v , pp->h , temp , N2 ) ;
+	mpz_add_ui ( temp , pp->N , 1 ) ;
+	mpz_powm ( temp , temp , s , N2 ) ;
+	mpz_mul ( puzzle->v , puzzle->v , temp ) ;
+	mpz_mod ( puzzle->v , puzzle->v , N2 ) ;
+	mpz_clear ( r ) ;
+	mpz_clear ( N2 ) ;
+	mpz_clear ( temp ) ;
+	gmp_randclear ( state );
+}
 void LHP_PSolve ( LHP_param_t* pp , LHP_puzzle_t* Z , LHP_puzzle_sol_t* solution )
 {
 	mpz_t idx , w , N2 ;

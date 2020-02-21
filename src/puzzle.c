@@ -18,3 +18,13 @@ void LHP_clear_puzzle ( LHP_puzzle_t* puzzle )
 	mpz_clear ( puzzle->u ) ;
 	mpz_clear ( puzzle->v ) ;
 }
+
+int LHP_puzzle_cmp ( LHP_puzzle_t* a , LHP_puzzle_t* b )
+{
+	int status = 0 ;
+	if ( ( status = mpz_cmp ( a -> u , b -> u ) ) != 0 ) {
+		return status ;
+	}
+	return mpz_cmp ( a -> v , b -> v ) ;
+}
+

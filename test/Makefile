@@ -19,7 +19,8 @@ CFLAGS=-I ${INCLUDE} -L ${LIBS} ${EXT_LIBS} -g
 
 test: code.test \
 	timecode.test \
-	batch.test
+	batch.test \
+	seeded.test
 
 clean: 
 	@rm -rf ./*.o
