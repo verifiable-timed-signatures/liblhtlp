@@ -1,0 +1,9 @@
+[submodule "depends/ate-pairing"]
+	path = depends/ate-pairing
+	url = git://github.com/herumi/ate-pairing.git
+[submodule "depends/libff"]
+	path = depends/libff
+	url = git://github.com/scipr-lab/libff.git
+[submodule "depends/xbyak"]
+	path = depends/xbyak
+	url = git://github.com/herumi/xbyak.git
