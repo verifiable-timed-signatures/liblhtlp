@@ -6,7 +6,7 @@ sourcedir=$(cd $scriptdir/../..; pwd -P)
 . $scriptdir/shlibs/check-env.sh
 . $scriptdir/shlibs/os.sh
 
-builddir=$VTSBLS_BUILD_DIR
+builddir=$LHTLP_BUILD_DIR
 
 (
     cd $sourcedir;

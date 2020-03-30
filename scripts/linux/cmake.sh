@@ -8,8 +8,8 @@ sourcedir=$(cd $scriptdir/../..; pwd -P)
 
 $scriptdir/submodule-update.sh
 
-builddir=$VTSBLS_BUILD_DIR
+builddir=$LHTLP_BUILD_DIR
 mkdir -p "$builddir"
 cd "$builddir"
 
-cmake $VTSBLS_CMAKE_ARGS $@ "$sourcedir"
+cmake $LHTLP_CMAKE_ARGS $@ "$sourcedir"

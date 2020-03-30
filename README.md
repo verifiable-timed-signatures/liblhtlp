@@ -1,4 +1,4 @@
-# libvtsbls: The VTS BLS library for verifiable timed BLS Signatures
+# liblhtlp: The Linearly Homomorphic Time Lock Puzzle library
 
 ## Build on Linux
 
@@ -9,7 +9,7 @@ First, install dependency libraries using:
 
     scripts/linux/install-libs.sh
 
-Then, set up the environment. This **will store the built code in ~/builds/vtsbls/**:
+Then, set up the environment.
 
     . scripts/linux/set-env.sh release
 

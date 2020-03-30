@@ -11,11 +11,11 @@ if [ $# -lt 1 ]; then
     echo "source $name release"
     echo "source $name relwithdebug"
     echo
-    if [ -n "$VTSBLS_HAS_ENV_SET" ]; then
+    if [ -n "$LHTLP_HAS_ENV_SET" ]; then
         echo "Currently-set environment"
         echo "========================="
-        echo "Build directory: $VTSBLS_BUILD_DIR"
-        echo "CMake args: $VTSBLS_CMAKE_ARGS"
+        echo "Build directory: $LHTLP_BUILD_DIR"
+        echo "CMake args: $LHTLP_CMAKE_ARGS"
     fi
 else
     # WARNING: Need to exit using control-flow rather than 'exit 1' because this script is sourced
@@ -30,7 +30,7 @@ else
     sourcedir=$(cd $scriptdir/../..; pwd -P)
     echo "Source dir: $sourcedir"
 
-    builddir_base=$sourcedir/builds/vtsbls
+    builddir_base=$sourcedir/builds/lhtlp
     case "$buildtype" in
     trace)
         builddir=$builddir_base/trace
@@ -65,9 +65,9 @@ else
         echo
 
         export PATH="$scriptdir:$PATH"
-        export PATH="$builddir/libvtsbls/bin:$PATH"
+        export PATH="$builddir/liblhtlp/bin:$PATH"
         # export PATH="$builddir/libvtsbls/bin/test:$PATH"
-        export PATH="$builddir/libvtsbls/bin/bench:$PATH"
+        export PATH="$builddir/liblhtlp/bin/bench:$PATH"
         # export PATH="$builddir/libvtsbls/bin/app:$PATH"
         # export PATH="$builddir/libvtsbls/bin/examples:$PATH"
 

@@ -1,39 +1,12 @@
 cmake_minimum_required (VERSION 3.2)
 # project(<name> VERSION <ver> LANGUAGES CXX)
-project(libvtsbls VERSION 0.1.0.0 LANGUAGES CXX)
-
-#
-# Configuration options
-#
-set(
-  CURVE
-  "BN128"
-  CACHE
-  STRING
-  "Default curve: one of ALT_BN128, BN128, EDWARDS, MNT4, MNT6"
-)
-
-option(
-  BINARY_OUTPUT
-  "In serialization of elliptic curve points, output raw binary data (instead of decimal), which is smaller and faster."
-  OFF
-)
-
-add_definitions(
-  -DCURVE_${CURVE}
-)
+project(liblhtlp VERSION 0.1.0.0 LANGUAGES CXX)
 
 option(
   USE_MULTITHREADING
-  "Enable parallelized execution of DKG protocols using OpenMP"
+  "Enable MULTITHREADING"
   OFF
 )
-
-if(${CURVE} STREQUAL "BN128")
-  add_definitions(
-    -DBN_SUPPORT_SNARK=1
-  )
-endif()
 
 #
 # Configure CCache if available
@@ -48,7 +21,7 @@ endif(CCACHE_FOUND)
 #find_package(Boost 1.65 COMPONENTS program_options REQUIRED)
 #include_directories(${Boost_INCLUDE_DIR})
 
-set(vtsbls_packages
+set(lhtlp_packages
 
 )
 
@@ -56,13 +29,13 @@ set(vtsbls_packages
 # Dependencies
 #
 # TODO: Find ate-pairing, libff, libfqfft too or issue error with pointer to install script
-foreach(package ${vtsbls_packages})
+foreach(package ${lhtlp_packages})
     find_package(${package} QUIET)
 
     if(${package}_FOUND)
         message("${package} library is installed!")
     else()
-        message("${package} library not installed locally, please download from https//github.com/alinush/lib${package}")
+        message("${package} library not installed locally, please download from https//github.com/adithyabhatkajake/lib${package}")
     endif()
 endforeach()
 
@@ -155,4 +128,4 @@ endif()
 enable_testing()
 
 # Subdirectories
-add_subdirectory(libvtsbls)
+add_subdirectory(liblhtlp)
